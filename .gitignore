@@ -1,0 +1,30 @@
+# --- Claude tooling / agent config (not part of the deliverable) ---
+.claude/
+
+# --- .NET ---
+bin/
+obj/
+*.user
+.vs/
+[Tt]est[Rr]esults/
+
+# EF / local databases
+*.mdf
+*.ldf
+
+# --- Angular / Node ---
+node_modules/
+dist/
+.angular/
+out-tsc/
+
+# --- Playwright (e2e) ---
+test-results/
+playwright-report/
+playwright/.cache/
+
+# --- Misc ---
+*.log
+.idea/
+*.swp
+.DS_Store

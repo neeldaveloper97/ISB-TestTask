@@ -1,0 +1,11 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #fafafa; }
+
+.page-container { padding: 24px; max-width: 1200px; margin: 0 auto; }
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.spacer { flex: 1 1 auto; }
+.full-width { width: 100%; }
+.filter-bar { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+table { width: 100%; }
+.muted { color: rgba(0, 0, 0, 0.54); }
+.actions-cell { display: flex; gap: 8px; }
