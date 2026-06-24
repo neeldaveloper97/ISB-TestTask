@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Property } from '../../../core/models/models';
 import { PropertyService } from '../../../core/services/property.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -68,6 +68,7 @@ import { CurrencyFormatPipe } from '../../../shared/pipes/currency-format.pipe';
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let p">
             <div class="actions-cell">
+              <button mat-icon-button (click)="onView(p)" aria-label="View"><mat-icon>visibility</mat-icon></button>
               <a mat-icon-button [routerLink]="['/properties', p.id, 'edit']" aria-label="Edit"><mat-icon>edit</mat-icon></a>
               <button mat-icon-button color="warn" (click)="confirmDelete(p)" aria-label="Delete"><mat-icon>delete</mat-icon></button>
             </div>
@@ -100,9 +101,11 @@ export class PropertyListComponent implements OnInit {
   addressFilter = '';
   readonly columns = ['name', 'address', 'price', 'registered', 'actions'];
 
-  constructor(private propertyService: PropertyService, private dialog: MatDialog) {}
+  constructor(private propertyService: PropertyService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void { this.load(); }
+
+  onView(p: Property): void { this.router.navigate(['/properties', p.id]); }
 
   load(): void {
     this.loading = true;

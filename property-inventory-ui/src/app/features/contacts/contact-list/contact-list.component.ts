@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Contact } from '../../../core/models/models';
 import { ContactService } from '../../../core/services/contact.service';
 
@@ -61,7 +61,10 @@ import { ContactService } from '../../../core/services/contact.service';
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let c">
-            <a mat-icon-button [routerLink]="['/contacts', c.id, 'edit']" aria-label="Edit"><mat-icon>edit</mat-icon></a>
+            <div class="actions-cell">
+              <button mat-icon-button (click)="onView(c)" aria-label="View"><mat-icon>visibility</mat-icon></button>
+              <a mat-icon-button [routerLink]="['/contacts', c.id, 'edit']" aria-label="Edit"><mat-icon>edit</mat-icon></a>
+            </div>
           </td>
         </ng-container>
 
@@ -92,9 +95,11 @@ export class ContactListComponent implements OnInit {
   emailFilter = '';
   readonly columns = ['name', 'phone', 'email', 'actions'];
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService, private router: Router) {}
 
   ngOnInit(): void { this.load(); }
+
+  onView(c: Contact): void { this.router.navigate(['/contacts', c.id]); }
 
   load(): void {
     this.loading = true;

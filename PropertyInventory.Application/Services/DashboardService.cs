@@ -19,7 +19,7 @@ public class DashboardService : IDashboardService
         var ownerships = await _propertyRepository.GetAllOwnershipsWithDetailsAsync();
 
         var rows = new List<DashboardRowDto>();
-        foreach (var o in ownerships.OrderByDescending(o => o.EffectiveFrom))
+        foreach (var o in ownerships.OrderByDescending(o => o.EffectiveFrom).ThenByDescending(o => o.Id))
         {
             var usd = await _currencyService.ConvertToUsdAsync(
                 o.AcquisitionPrice, o.AcquisitionCurrency, o.EffectiveFrom);
